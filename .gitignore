@@ -1,0 +1,33 @@
+# Large local training artifacts
+.torch-cache/
+__pycache__/
+temp_student/
+
+# Workspace outputs that are not needed in the GitHub repo
+cs541_workspace/data/
+cs541_workspace/ood-test-CS541/
+cs541_workspace/checkpoints/
+cs541_workspace/logs/
+cs541_workspace/report_part3_history/
+cs541_workspace/
+cs541_workspace/version_runs/**/data/
+cs541_workspace/version_runs/**/ood-test-CS541/
+cs541_workspace/version_runs/**/checkpoints/
+cs541_workspace/version_runs/**/logs/
+
+# Local packaging leftovers
+final_submission/
+challenge_files/
+cs-541-challenge-spring-2026.zip
+handoff_status.md
+presentation_3min.md
+presentation_5min.md
+presentation_report.md
+experiment_notes.md
+report_outline.md
+rules.txt
+workflow.md
+sp2026_midterm_student_baseline_colab.ipynb
+
+# Notebook checkpoints
+.ipynb_checkpoints/

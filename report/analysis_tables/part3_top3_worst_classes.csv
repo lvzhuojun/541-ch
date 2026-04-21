@@ -1,0 +1,4 @@
+class_id,class_name,correct,total,accuracy
+11,boy,62,100,0.62
+35,girl,66,100,0.66
+47,maple_tree,66,100,0.66
