@@ -28,6 +28,9 @@ report_outline.md
 rules.txt
 workflow.md
 sp2026_midterm_student_baseline_colab.ipynb
+report/
+submissions/
+deliverables/report_assets/part3_largest_errors.csv
 
 # Notebook checkpoints
 .ipynb_checkpoints/

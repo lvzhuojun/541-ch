@@ -131,14 +131,14 @@ For the best local Part 3 model used for the report analysis:
 
 The corresponding history file is:
 
-- `report/analysis_tables/part3_history.csv`
+- `deliverables/report_assets/part3_history.csv`
 
 ### Loss and Accuracy Plots
 
 The required plots for the best model are included here:
 
-- `report/figures/part3_loss_curve.png`
-- `report/figures/part3_accuracy_curve.png`
+- `deliverables/report_assets/part3_loss_curve.png`
+- `deliverables/report_assets/part3_accuracy_curve.png`
 
 ### Top 3 Worst-Performing Classes
 
@@ -150,7 +150,7 @@ Based on per-class accuracy on the clean CIFAR-100 test split, the three worst c
 
 Supporting table:
 
-- `report/analysis_tables/part3_top3_worst_classes.csv`
+- `deliverables/report_assets/part3_top3_worst_classes.csv`
 
 ### Top 3 Largest Prediction Errors
 
@@ -162,10 +162,10 @@ Using the largest incorrect logit gap between the predicted class and true class
 
 Supporting files:
 
-- `report/analysis_tables/part3_top3_error_samples.csv`
-- `report/figures/part3_largest_error_1.png`
-- `report/figures/part3_largest_error_2.png`
-- `report/figures/part3_largest_error_3.png`
+- `deliverables/report_assets/part3_top3_error_samples.csv`
+- `deliverables/report_assets/part3_largest_error_1.png`
+- `deliverables/report_assets/part3_largest_error_2.png`
+- `deliverables/report_assets/part3_largest_error_3.png`
 
 ### Discussion
 
@@ -230,13 +230,13 @@ What did not work as well:
 
 ## 8. AI Disclosure
 
-I used AI assistance in a limited support role during this assignment. AI tools were mainly used for:
+I used AI tools in a limited support role during this assignment. They were mainly used for:
 
 - repository cleanup and file organization
-- polishing documentation wording and submission instructions
-- small utility scripting support for generating report artifacts such as summary tables and figures
+- minor wording edits in documentation
+- small utility support for exporting report figures and summary tables
 
-The core project work that I completed myself included:
+The main project work that I completed myself included:
 
 - deciding the modeling strategy for all three parts
 - choosing and running the training experiments
