@@ -244,35 +244,18 @@ class TrainingResult:
     history: Dict[str, List[float]]
 
 
-@torch.no_grad()
-def evaluate_model(
-    model: nn.Module,
-    loader: DataLoader,
-    device: torch.device,
-    criterion: nn.Module | None = None,
-) -> Dict[str, float]:
-    """Evaluate a loader and optionally compute average loss."""
+def evaluate_accuracy(model: nn.Module, loader: DataLoader, device: torch.device) -> float:
     model.eval()
     correct = 0
     total = 0
-    total_loss = 0.0
     with torch.no_grad():
         for xb, yb in loader:
             xb = xb.to(device, non_blocking=True)
             yb = yb.to(device, non_blocking=True)
             logits = model(xb)
-            if criterion is not None:
-                total_loss += criterion(logits, yb).item() * yb.size(0)
             correct += (logits.argmax(dim=1) == yb).sum().item()
             total += yb.numel()
-    metrics = {"acc": correct / max(total, 1)}
-    if criterion is not None:
-        metrics["loss"] = total_loss / max(total, 1)
-    return metrics
-
-
-def evaluate_accuracy(model: nn.Module, loader: DataLoader, device: torch.device) -> float:
-    return evaluate_model(model, loader, device)["acc"]
+    return correct / max(total, 1)
 
 
 def train_model(
@@ -290,18 +273,12 @@ def train_model(
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
 
-    history: Dict[str, List[float]] = {
-        "train_loss": [],
-        "train_acc": [],
-        "val_loss": [],
-        "val_acc": [],
-    }
+    history: Dict[str, List[float]] = {"train_acc": [], "val_acc": []}
     best_val_acc = -1.0
     best_state: Dict[str, torch.Tensor] | None = None
 
     for epoch in range(1, epochs + 1):
         model.train()
-        train_loss_total = 0.0
         train_correct = 0
         train_total = 0
 
@@ -314,25 +291,18 @@ def train_model(
             loss.backward()
             optimizer.step()
 
-            train_loss_total += loss.item() * yb.size(0)
             train_correct += (logits.argmax(dim=1) == yb).sum().item()
             train_total += yb.numel()
 
-        val_metrics = evaluate_model(model, val_loader, device, criterion=criterion)
-        val_acc = val_metrics["acc"]
-        val_loss = val_metrics["loss"]
-        train_loss = train_loss_total / max(train_total, 1)
+        val_acc = evaluate_accuracy(model, val_loader, device)
         train_acc = train_correct / max(train_total, 1)
-        history["train_loss"].append(train_loss)
         history["train_acc"].append(train_acc)
-        history["val_loss"].append(val_loss)
         history["val_acc"].append(val_acc)
         scheduler.step()
 
         print(
             f"Epoch {epoch:02d}/{epochs} | "
-            f"train_loss={train_loss:.4f} | train_acc={train_acc:.4f} | "
-            f"val_loss={val_loss:.4f} | val_acc={val_acc:.4f} | "
+            f"train_acc={train_acc:.4f} | val_acc={val_acc:.4f} | "
             f"lr={scheduler.get_last_lr()[0]:.6f}"
         )
 

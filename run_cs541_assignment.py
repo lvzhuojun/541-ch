@@ -5,7 +5,6 @@ import os
 
 import pandas as pd
 import torch
-import matplotlib.pyplot as plt
 
 from cs541_challenge_utils import (
     build_submission,
@@ -50,40 +49,7 @@ PART_CONFIGS = {
 }
 
 
-def write_history_artifacts(history_dir: str, part_id: int, history: dict) -> None:
-    """Save per-epoch metrics and plot them for later report writing."""
-    os.makedirs(history_dir, exist_ok=True)
-    history_df = pd.DataFrame(history)
-    history_csv = os.path.join(history_dir, f"part_{part_id}_history.csv")
-    history_df.to_csv(history_csv, index=False)
-
-    epochs = range(1, len(history_df) + 1)
-
-    plt.figure(figsize=(7, 4))
-    plt.plot(epochs, history_df["train_loss"], label="train_loss")
-    plt.plot(epochs, history_df["val_loss"], label="val_loss")
-    plt.xlabel("Epoch")
-    plt.ylabel("Loss")
-    plt.title(f"Part {part_id} Loss Curve")
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig(os.path.join(history_dir, f"part_{part_id}_loss_curve.png"), dpi=160)
-    plt.close()
-
-    plt.figure(figsize=(7, 4))
-    plt.plot(epochs, history_df["train_acc"], label="train_acc")
-    plt.plot(epochs, history_df["val_acc"], label="val_acc")
-    plt.xlabel("Epoch")
-    plt.ylabel("Accuracy")
-    plt.title(f"Part {part_id} Accuracy Curve")
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig(os.path.join(history_dir, f"part_{part_id}_accuracy_curve.png"), dpi=160)
-    plt.close()
-
-
 def append_experiment_log(log_path: str, row: dict) -> pd.DataFrame:
-    """Append one run summary row to the machine-readable experiment log."""
     if os.path.exists(log_path):
         df = pd.read_csv(log_path)
         df = pd.concat([df, pd.DataFrame([row])], ignore_index=True)
@@ -95,7 +61,6 @@ def append_experiment_log(log_path: str, row: dict) -> pd.DataFrame:
 
 
 def parse_args() -> argparse.Namespace:
-    """Expose one CLI for training runs and submission-only CSV export."""
     parser = argparse.ArgumentParser(description="Run the CS541 challenge workflow.")
     parser.add_argument("--parts", type=int, nargs="+", default=[1, 2, 3], choices=[1, 2, 3])
     parser.add_argument("--student-name", default="Zhuojun Lyu")
@@ -119,7 +84,6 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> None:
-    """Train requested parts, optionally export submissions, and save run metadata."""
     args = parse_args()
     set_seed(args.seed)
     device = get_device()
@@ -190,7 +154,6 @@ def main() -> None:
             )
             result_best_val_acc = result.best_val_acc
             result_clean_test_acc = result.clean_test_acc
-            write_history_artifacts(log_dir, part_id, result.history)
 
         submission_path = ""
         submission_rows = 0

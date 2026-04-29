@@ -17,6 +17,9 @@ cs541_workspace/version_runs/**/logs/
 
 # Local packaging leftovers
 final_submission/
+repo_submit_v089/
+submission_ready_081/
+submission_ready_best/
 challenge_files/
 cs-541-challenge-spring-2026.zip
 handoff_status.md
@@ -28,6 +31,7 @@ report_outline.md
 rules.txt
 workflow.md
 sp2026_midterm_student_baseline_colab.ipynb
+todo.txt
 report/
 submissions/
 deliverables/report_assets/part3_largest_errors.csv

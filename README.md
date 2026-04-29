@@ -18,7 +18,7 @@ The goal of the project was to improve both clean CIFAR-100 performance and robu
 This repo is intentionally small and only keeps the files needed for the course submission.
 
 - `deliverables/`
-  Contains the notebook, report draft, Kaggle CSV files, and report figures/tables.
+  Contains the notebook, report, Kaggle CSV files, and report figures/tables.
 - `run_cs541_assignment.py`
   Main script for training runs and CSV export.
 - `cs541_challenge_utils.py`
@@ -40,7 +40,7 @@ The selected submission versions in this repo are:
 
 - Part 1: root Part 1 submission
 - Part 2: `part2_v070` submission
-- Part 3: `part3_v080` submission
+- Part 3: `part3_v089` submission
 
 ### Colab / Notebook
 
@@ -57,5 +57,3 @@ Use:
 The supporting figures and analysis tables referenced by the report are stored in:
 
 - `deliverables/report_assets/`
-
-The final PDF can be exported from Word later.

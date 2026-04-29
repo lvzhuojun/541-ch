@@ -1,6 +1,6 @@
 # Deliverables
 
-This folder contains the files I would actually use when submitting the assignment.
+This folder contains the files used for the final submission package.
 
 ## Kaggle
 
@@ -21,8 +21,6 @@ Use:
 Use:
 
 - `CS541_Report_Draft_For_Word.md`
-
-This is the draft that can be moved into Word and exported to PDF later.
 
 ## Report Assets
 
